@@ -1,0 +1,43 @@
+---
+    import Header from '../components/header.astro';
+    import Filter from '../components/filter.astro';
+    import Glagne from '../components/glagne.astro';
+
+    const releases = await Astro.glob("../releases/*.json");
+
+    for (let rel of releases)
+        console.log(rel.data.title);
+
+        console.log("");
+    
+    releases.sort(function(x, y) {
+        return (x.data.year > y.data.year) ? -1 : (x.data.year < y.data.year) ? 1 : 0
+    });
+    
+    for (let rel of releases)
+        console.log(rel.data.title);
+
+---
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Релизы</title>
+        <Header />
+</head>
+<body class="body-releases">
+<Filter />
+<Glagne />
+<main class="releases">
+{releases.map((release, i) =>
+
+    <a class="psycho-out" href={`/release/${release.data.id}`}>
+        <div class="cover"><img src={`/public/covers/${release.data.id}.jpg`} alt="" /></div>
+    <h2><span class="pseudo-a psycho-in">{release.data.title}</span></h2>
+    <h3>{release.data.year} &bull; {release.data.kind}</h3>
+    </a>
+)
+}
+</main>
+</body>
+</html>

@@ -1,0 +1,217 @@
+* {
+  font-family: "Murecho", "Roboto", sans-serif;
+
+}
+
+body {
+  background-color: #222;
+  color: white;
+}
+
+body.release {
+  display: flex;
+  flex-direction: column;
+  margin: 0.7em;
+  text-align: center;
+}
+
+body.release .details section
+{
+  width:auto;
+  display:inline-block;
+  text-align: left;
+  min-width: 20em;
+}
+
+.feat {
+  opacity: 0.5;
+  font-style: italic;
+}
+
+section.featured h3
+{
+  margin-bottom: 0.2em;
+}
+
+section.featured > h3 + p {
+  margin-top:0;
+  opacity: 0.5;
+  font-style: italic;
+}
+
+section.featured ul li
+{
+  list-style: none;
+}
+
+
+body.body-releases {
+  background: rgb(0,77,142);
+  background: linear-gradient(119deg, rgba(0,77,142,1) 0%, rgba(126,46,0,1) 32%, rgba(100,41,110,1) 67%, rgba(0,125,116,1) 100%),
+              linear-gradient(230deg, rgba(3, 178, 4, 1) 0%, rgba(255,243,20,1) 32%, rgba(8,207,231,1) 63%, rgba(86,104,5,1) 100%);
+  background-blend-mode: hard-light; 
+}
+
+main.releases {
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+main.releases>a {
+  color: inherit;
+  border-bottom: none;
+  padding: 1.4em;
+  width: calc(23em + 1.4em);
+}
+
+main.releases>a img {
+  width: 23em;
+  height: 23em;
+}
+
+a, .pseudo-a, .unreal {
+  color: rgb(127, 255, 249);
+  text-decoration: none;
+  border-bottom: 1px solid rgb(127, 197, 255, 0.7);
+  padding-bottom: 0.2em
+}
+
+@keyframes squiggly-anim {
+  0% {
+    filter: url("#squiggly-0");
+  }
+
+  25% {
+    filter: url("#squiggly-1");
+  }
+
+  50% {
+    filter: url("#squiggly-2");
+  }
+
+  75% {
+    filter: url("#squiggly-3");
+  }
+
+  100% {
+    filter: url("#squiggly-4");
+  }
+}
+
+body {
+  padding: 0;
+  margin: 0
+}
+
+hgroup {
+  
+  height: 100vh;
+  background: url('/public/mrch.jpg');
+  background-color: #282a1a;
+  background-position: 0% 30%;
+  background-size: cover;
+}
+
+hgroup > * {
+  max-width: 50vh;
+}
+
+hgroup * {
+  text-transform: uppercase;
+  font-size: 5vh;
+  margin:0; padding:0; list-style: none;
+  max-width: 50vh
+}
+
+hgroup a { position:relative; }
+
+hgroup a:not(:hover) span { mix-blend-mode: color-dodge;  }
+
+hgroup a .bg {
+  display:block;
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  content:'';
+  background-image: linear-gradient(90deg, #7c6f00, #a83c01);
+  mix-blend-mode: hard-light;
+}
+
+.psycho:hover, .psycho-out:hover .psycho-in {
+  animation: squiggly-anim 0.15s linear infinite;
+}
+
+h1 {
+  margin-bottom: 0.2em;
+  line-height: 1.1em;
+  margin-top: 0em
+}
+
+.date {
+  margin: 0;
+  opacity: 0.3
+}
+
+.cover img {
+  width: 600px;
+  height: 600px;
+  max-width: 94vw;
+  max-height: 94vw;
+}
+
+.badges {
+  margin-top: 1em;
+  display: flex;
+  font-size: 110%;
+  justify-content: center;
+  flex-wrap: wrap
+}
+
+.badges>* {
+  padding: 0.4em;
+  white-space: nowrap;
+}
+
+.badges a.img {
+  border-bottom: none;
+}
+
+.badges img {
+  height: 3em;
+}
+
+.description>div {
+  display: inline-block;
+  max-width: 900px;
+  font-style: italic;
+}
+
+@media (max-width: 750px) {
+  * {
+    text-align: left;
+  }
+
+  .badges {
+    /* flex-direction: column; */
+    justify-content: left;
+  }
+
+  body.release h1 {
+    display: none;
+  }
+
+  .date {
+    font-size: 0.4rem;
+  }
+
+  .badges>* {
+    padding: 0 0.6em 0.4em 0;
+  }
+
+  .badges img {
+    height: 2.7em;
+  }
+}

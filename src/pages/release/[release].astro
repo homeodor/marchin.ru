@@ -1,0 +1,220 @@
+---
+    import Header from '../../components/header.astro';
+    import Filter from '../../components/filter.astro';
+    import Glagne from '../../components/glagne.astro';
+    import * as Release from '../../ts/types'
+    
+    const jsons = import.meta.glob("../../releases/*.json");
+    const styles = import.meta.glob("../../../public/css/*.css");
+    
+    export function getStaticPaths() {
+
+        const jsons = import.meta.glob("../../releases/*.json");
+
+        const returnArray = [];
+        for (const path in jsons)
+        {
+            returnArray.push({params: { release: path.split('/').pop()?.replace(".json", "") }});
+        }
+
+        return returnArray;
+    }
+
+    const { release } = Astro.params;
+    const releasePath = `../../releases/${release}.json`;
+    
+    const json = (await jsons[releasePath]()) as Release.Release;
+    const data = json.data;
+    //const streamings = json.streaming;
+    const detailsAvailable: any = data.stats || data.tracklist || data.workingtitles;
+    const featuredArtists: string[] = [];
+    const css = (`../../../public/css/${release}.css` in styles) ? `/css/${release}.css` : false;
+
+    const streamings: { id: string, link: any }[] = [];
+
+    for (const streaming in json.streaming)
+    {
+        streamings.push({id: streaming, link: json.streaming[streaming]});
+    };
+
+    function track(track: any)
+    {
+        if (typeof track == "object")
+        {
+            if (track.feat || track.cover || track.version)
+            {
+                const more = [];
+                     
+                if (track.feat)
+                {
+                    
+                    if (Array.isArray(track.feat))
+                    {
+                        more.push(`feat. ${track.feat.join(", ")}`);
+                        
+                        for (const feat of track.feat)
+                        {
+                            featuredArtists.push(feat);
+                        }
+
+                    } else {
+                        more.push(`feat. ${track.feat}`);
+                        featuredArtists.push(track.feat);
+                    }
+                }
+                
+                if (track.cover)
+                {
+                    more.push(`оригинал — ${track.cover}`);
+                }
+                
+                if (track.version)
+                {
+                    more.push(track.version);
+                }
+                
+                return {track: track.title, feat: more.join(", ")};
+            } else {
+                throw `WTF`;
+            }
+        } else {
+            return { track: track };
+        }
+    }
+
+    function onestat(statArray: string[], array: any, key: string, comment: string, after: string = "")
+    {
+        if (array[key] === undefined)
+            return;
+        
+        if (after)
+            after = " " + after;
+        
+        statArray.push(`${comment}: ${array[key]}${after}`);
+    }
+    
+    function quotize(item: string)
+    {
+        return `«${item}»`;
+    }
+
+    function ucfirst(str: string)
+    {
+        return str[0].toUpperCase() + str.slice(1);
+    }
+    
+    const stats: string[] = [];
+
+    onestat(stats, data.stats, "tracks", "Всего треков");
+    onestat(stats, data.stats, "omissions", "Треков не вошло");
+    onestat(stats, data.stats, "minutes", "Время звучания", "мин.");
+    onestat(stats, data.stats, "startyear", "Год начала работы");
+//
+---
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{data.title}</title>
+        <Header />
+        {css && <link rel="stylesheet" href={css} /> }
+</head>
+<body class="release">
+    <Filter />
+    <h1>{data.title}</h1>
+    <h3 class="date">{data.year}</h3>
+    <div class="cover">
+        <img src={`/public/covers/${release}.jpg`} alt="" />
+    </div>
+    <div class="badges">
+        { streamings.map((streamingObject: any, i) =>
+            {
+            let link = streamingObject.link;
+            let streamingName = ucfirst(streamingObject.id);
+            let badgeSource = streamingObject.id;
+            const badgeSourceExtension = "svg";
+
+            switch (streamingObject.id)
+            {
+                case "apple":
+                    streamingName = "Apple Music";
+                    badgeSource = "applemusic";
+                    break;
+                case "yandex":
+                    streamingName = "Яндекс Музыка";
+                    break;
+                case "vk":
+                    streamingName = "VK Музыка";
+                    break;
+            }
+
+            badgeSource = `/badges/${badgeSource}.${badgeSourceExtension}`;
+
+            return (<div class="badge">
+                <a href={link} class="img"><img src={badgeSource} alt={streamingName} /></a>
+            </div>);
+            
+            })
+        }
+    </div>
+
+    <div class="description"><div>{data.description ?? ""}</div></div>
+    
+    <footer>
+    <p>Подпишитесь плез на Марчина в любимой соцсети:
+        <a class="psycho" href="https://t.me/marchin_koshka">Telegram</a>,
+        <a class="psycho" href="https://instagram.com/marchinkoshka">*********</a>,
+        <a class="psycho" href="https://vk.com/marchinkoshka">VK</a>
+    </p>
+    </footer>
+    
+    { detailsAvailable &&
+    <div class="hh details">
+        { data.tracklist && <section class="tracklist">
+         {
+            data.tracklist.map((tracklistblock: any) =>
+            <h3>{tracklistblock?.header ?? "Треклист"}</h3>
+            <ol>
+            {
+                    tracklistblock.tracks.map((trackObject: any) =>
+                    {
+                        const trackData = track(trackObject);
+                        return (<li>{trackData.track} {trackData.feat && <span class="feat">{trackData.feat}</span>}</li>)
+                    }
+                )
+            }
+            </ol>)}
+        </section>
+        }
+        { featuredArtists.length &&
+            <section class="featured">
+                <h3>Фиты</h3>
+                <p>В порядке появления на альбоме</p>
+                <ul>
+                {
+                    ([...new Set(featuredArtists)]).map((feat) =>
+                    <li>{feat}</li>
+                    )
+                } 
+                </ul>
+                <p>(Спасибо огромное!)</p>
+            </section>
+        } 
+        {(data['stats'] || data['workingtitles']) &&
+            <section class="stats">
+        
+            <h3>Всякие факты</h3>
+            {
+                data.stats && stats.map(onestat => <p>{onestat}</p>)
+            }
+            { data.workingtitles && 
+                <p>Рабочие названия: {data.workingtitles.map((t: string) => quotize(t)).join(", ")}</p>
+            } 
+        
+        </section>
+        }
+    </div>
+    }
+
+
+    </body>
+</html>

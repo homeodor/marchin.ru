@@ -1,0 +1,29 @@
+body {
+    background-color: white;
+    --main-color: #32297E;
+    color: var(--main-color);
+}
+
+a, a:hover {
+    color: var(--main-color);
+    border-bottom: 1px solid #32297E66;
+    filter:none!important;
+    animation:none!important;
+}
+
+.badges a {
+    position: relative;
+    display: inline-block
+}
+
+.badges a::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: var(--main-color);
+    z-index: 9999;
+    content: '';
+    mix-blend-mode: color;
+}

@@ -1,0 +1,29 @@
+{
+  "data": {
+    "id": "vi",
+    "title": "VI",
+    "year": 2020,
+    "kind": "EP",
+    "description": "Мини-альбом, подытоживший творчество Марчина с 2014 по 2017 годы, вышел на шестилетие проекта. Шесть лучших песен из «тех времён»! (Да, «Щёчки» тоже.)",
+    "tracklist":
+    [
+      {
+        "tracks":
+        [
+          "Космонавты не танцуют",
+          "Змииииииииииииииииииии",
+          "Щёчки",
+          "Половина двенадцатого",
+          "Космос",
+          "Песня о любви"
+        ]
+      }
+    ]
+  },
+  "streaming": {
+    "yandex": "https://music.yandex.ru/album/26000645",
+    "apple": "https://music.apple.com/us/album/vi-ep/1689978534",
+    "vk": "https://vk.com/music/album/-2000103744_18103744_cf7b34713dce06c942",
+    "spotify": "https://open.spotify.com/album/3p7C1TIoVrWnMwZl71jbjq?si=bUvk5UQpRBGzilcBqpyqPw"
+  }
+}
