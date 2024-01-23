@@ -1,29 +1,32 @@
 ---
-import Header from '../components/header.astro';
-import Filter from '../components/filter.astro';
-import Glagne from '../components/glagne.astro';
-
+import Header from "../components/header.astro";
+import Filter from "../components/filter.astro";
+import Glagne from "../components/glagne.astro";
 ---
-<!DOCTYPE html>
+
+<!doctype html>
 <html>
-    <head>
-        <title>Концерты</title>
-        <Header />
-</head>
-<body class="body-releases">
-<Filter />
-<Glagne />
-<main class="shows">
-    <section class="show">
-        <h1>В ближайшее время концертов нет</h1>
-    </section>
-    <h2>Прошедшие</h2>
-    <section class="oldshows">
-        <p><a href="https://vk.com/marchin_uspeh">В «Успехе»</a></p>
-        <p><a href="https://vk.com/marcinlive">В «Лётчике»</a>, «Стокгольмский синдром»</p>
-        <p><a href="https://vk.com/marcinlive2017">В «Лётчике»</a></p>
-        <p>В «Керосине»</p>
-    </section>
-</main>
-</body>
+	<head>
+		<title>Концерты</title>
+		<Header />
+	</head>
+	<body class="body-releases">
+		<Filter />
+		<Glagne />
+		<main class="shows">
+			<section class="show">
+				<h1>В ближайшее время концертов нет</h1>
+			</section>
+			<h2>Прошедшие</h2>
+			<section class="oldshows">
+				<p><a href="https://vk.com/marchin_uspeh">В «Успехе»</a></p>
+				<p>
+					<a href="https://vk.com/marcinlive">В «Лётчике»</a>,
+					«Стокгольмский синдром»
+				</p>
+				<p><a href="https://vk.com/marcinlive2017">В «Лётчике»</a></p>
+				<p>В «Керосине»</p>
+			</section>
+		</main>
+	</body>
 </html>

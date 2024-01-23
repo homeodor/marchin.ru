@@ -1,54 +1,51 @@
 {
-  "data": {
-    "id": "krjemelik",
-    "title": "Кржемелик переводит часы",
-    "year": 2023,
-    "kind": "EP",
-    "description": "Третий мини-альбом Марчина с бодрыми треками, отсылающими к самому началу, к рождению проекта в подвале на Манстер-роуд!",
-    "workingtitles":
-    [
-      "EP III",
-      "Прометей",
-      "248Б Манстер роуд",
-      "Оставлю и пойду налегке"
-    ],
-    "tracklist":
-    [
-      {
-      "tracks": [
-      "Манстер-роуд",
-      {
-        "title": "Труп бывшей",
-        "feat": "Натали Дунаевская"
-      },
-      {
-        "title": "Северное лето",
-        "feat": "день скакания на одной ножке"
-      },
-      "Самый большой простой машинист",
-      {
-        "title": "Котик на трёх лапках",
-        "feat": "Дела Croix"
-      },
-      {
-        "title": "Депривация цна",
-        "feat": "день скакания на одной ножке"
-      }
-      ]
-      }
-    ],
-    "stats": 
-    {
-      "tracks": 6,
-      "minutes": 21,
-      "omissions": 7,
-      "startyear": 2018
-    }
-  },
-  "streaming": {
-    "yandex": "https://music.yandex.ru/album/28765101",
-    "vk": "https://vk.com/music/album/-2000713258_19713258_a567a303038a9e2e05",
-    "apple": "https://music.apple.com/us/album/%D0%BA%D1%80%D0%B6%D0%B5%D0%BC%D0%B5%D0%BB%D0%B8%D0%BA-%D0%BF%D0%B5%D1%80%D0%B5%D0%B2%D0%BE%D0%B4%D0%B8%D1%82-%D1%87%D0%B0%D1%81%D1%8B-ep/1723128860",
-    "spotify": "https://open.spotify.com/album/69g1vdv9LsGYThjrWr0rOK?si=AkoGEx1aRdyjJ8NN6xnMow"
-  }
+	"data": {
+		"id": "krjemelik",
+		"title": "Кржемелик переводит часы",
+		"year": 2023,
+		"kind": "EP",
+		"description": "Третий мини-альбом Марчина с бодрыми треками, отсылающими к самому началу, к рождению проекта в подвале на Манстер-роуд!",
+		"workingtitles": [
+			"EP III",
+			"Прометей",
+			"248Б Манстер роуд",
+			"Оставлю и пойду налегке"
+		],
+		"tracklist": [
+			{
+				"tracks": [
+					"Манстер-роуд",
+					{
+						"title": "Труп бывшей",
+						"feat": "Натали Дунаевская"
+					},
+					{
+						"title": "Северное лето",
+						"feat": "день скакания на одной ножке"
+					},
+					"Самый большой простой машинист",
+					{
+						"title": "Котик на трёх лапках",
+						"feat": "Дела Croix"
+					},
+					{
+						"title": "Депривация цна",
+						"feat": "день скакания на одной ножке"
+					}
+				]
+			}
+		],
+		"stats": {
+			"tracks": 6,
+			"minutes": 21,
+			"omissions": 7,
+			"startyear": 2018
+		}
+	},
+	"streaming": {
+		"yandex": "https://music.yandex.ru/album/28765101",
+		"vk": "https://vk.com/music/album/-2000713258_19713258_a567a303038a9e2e05",
+		"apple": "https://music.apple.com/us/album/%D0%BA%D1%80%D0%B6%D0%B5%D0%BC%D0%B5%D0%BB%D0%B8%D0%BA-%D0%BF%D0%B5%D1%80%D0%B5%D0%B2%D0%BE%D0%B4%D0%B8%D1%82-%D1%87%D0%B0%D1%81%D1%8B-ep/1723128860",
+		"spotify": "https://open.spotify.com/album/69g1vdv9LsGYThjrWr0rOK?si=AkoGEx1aRdyjJ8NN6xnMow"
+	}
 }
