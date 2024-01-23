@@ -3,14 +3,6 @@ import Header from '../components/header.astro';
 import Filter from '../components/filter.astro';
 import Glagne from '../components/glagne.astro';
 
-export function getStaticPaths() {
-    return [
-      {params: {page: 'shows'}},
-      {params: {page: 'releases'}},
-    ];
-}
-  
-const { page } = Astro.params;
 ---
 <!DOCTYPE html>
 <html>

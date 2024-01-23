@@ -5,17 +5,9 @@
 
     const releases = await Astro.glob("../releases/*.json");
 
-    for (let rel of releases)
-        console.log(rel.data.title);
-
-        console.log("");
-    
     releases.sort(function(x, y) {
         return (x.data.year > y.data.year) ? -1 : (x.data.year < y.data.year) ? 1 : 0
     });
-    
-    for (let rel of releases)
-        console.log(rel.data.title);
 
 ---
 <!DOCTYPE html>
@@ -29,10 +21,10 @@
 <Filter />
 <Glagne />
 <main class="releases">
-{releases.map((release, i) =>
+{releases.map((release) =>
 
     <a class="psycho-out" href={`/release/${release.data.id}`}>
-        <div class="cover"><img src={`/public/covers/${release.data.id}.jpg`} alt="" /></div>
+        <div class="cover"><img src={`/covers/${release.data.id}.jpg`} alt="" /></div>
     <h2><span class="pseudo-a psycho-in">{release.data.title}</span></h2>
     <h3>{release.data.year} &bull; {release.data.kind}</h3>
     </a>

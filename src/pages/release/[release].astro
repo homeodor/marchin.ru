@@ -1,11 +1,11 @@
 ---
     import Header from '../../components/header.astro';
     import Filter from '../../components/filter.astro';
-    import Glagne from '../../components/glagne.astro';
-    import * as Release from '../../ts/types'
+    import * as Release from '../../ts/types';
+    //@ts-expect-error
+    import { existsSync } from 'node:fs';
     
     const jsons = import.meta.glob("../../releases/*.json");
-    const styles = import.meta.glob("../../../public/css/*.css");
     
     export function getStaticPaths() {
 
@@ -25,11 +25,9 @@
     
     const json = (await jsons[releasePath]()) as Release.Release;
     const data = json.data;
-    //const streamings = json.streaming;
     const detailsAvailable: any = data.stats || data.tracklist || data.workingtitles;
     const featuredArtists: string[] = [];
-    const css = (`../../../public/css/${release}.css` in styles) ? `/css/${release}.css` : false;
-
+    const css = existsSync(`public/css/${release}.css`) ? `/css/${release}.css` : false;
     const streamings: { id: string, link: any }[] = [];
 
     for (const streaming in json.streaming)
@@ -84,7 +82,7 @@
 
     function onestat(statArray: string[], array: any, key: string, comment: string, after: string = "")
     {
-        if (array[key] === undefined)
+        if (array === undefined || array[key] === undefined)
             return;
         
         if (after)
@@ -116,17 +114,17 @@
     <head>
         <title>{data.title}</title>
         <Header />
-        {css && <link rel="stylesheet" href={css} /> }
+        { css && <link rel="stylesheet" href={css} />}
 </head>
 <body class="release">
     <Filter />
     <h1>{data.title}</h1>
     <h3 class="date">{data.year}</h3>
     <div class="cover">
-        <img src={`/public/covers/${release}.jpg`} alt="" />
+        <img src={`/covers/${release}.jpg`} alt="" />
     </div>
     <div class="badges">
-        { streamings.map((streamingObject: any, i) =>
+        { streamings.map((streamingObject) =>
             {
             let link = streamingObject.link;
             let streamingName = ucfirst(streamingObject.id);
@@ -168,50 +166,52 @@
     </footer>
     
     { detailsAvailable &&
-    <div class="hh details">
-        { data.tracklist && <section class="tracklist">
-         {
-            data.tracklist.map((tracklistblock: any) =>
-            <h3>{tracklistblock?.header ?? "Треклист"}</h3>
-            <ol>
+    <div class="details">
+        <div class="sectionholder">
+            { data.tracklist && <section class="tracklist">
             {
-                    tracklistblock.tracks.map((trackObject: any) =>
-                    {
-                        const trackData = track(trackObject);
-                        return (<li>{trackData.track} {trackData.feat && <span class="feat">{trackData.feat}</span>}</li>)
-                    }
-                )
-            }
-            </ol>)}
-        </section>
-        }
-        { featuredArtists.length &&
-            <section class="featured">
-                <h3>Фиты</h3>
-                <p>В порядке появления на альбоме</p>
-                <ul>
+                data.tracklist.map((tracklistblock: any) =>
+                <h3>{tracklistblock?.header ?? "Треклист"}</h3>
+                <ol>
                 {
-                    ([...new Set(featuredArtists)]).map((feat) =>
-                    <li>{feat}</li>
+                        tracklistblock.tracks.map((trackObject: any) =>
+                        {
+                            const trackData = track(trackObject);
+                            return (<li>{trackData.track} {trackData.feat && <span class="feat">{trackData.feat}</span>}</li>)
+                        }
                     )
-                } 
-                </ul>
-                <p>(Спасибо огромное!)</p>
+                }
+                </ol>)}
             </section>
-        } 
-        {(data['stats'] || data['workingtitles']) &&
-            <section class="stats">
-        
-            <h3>Всякие факты</h3>
-            {
-                data.stats && stats.map(onestat => <p>{onestat}</p>)
             }
-            { data.workingtitles && 
-                <p>Рабочие названия: {data.workingtitles.map((t: string) => quotize(t)).join(", ")}</p>
+            { featuredArtists.length !== 0 &&
+                <section class="featured">
+                    <h3>Фиты</h3>
+                    <p>В порядке появления на альбоме</p>
+                    <ul>
+                    {
+                        ([...new Set(featuredArtists)]).map((feat) =>
+                        <li>{feat}</li>
+                        )
+                    } 
+                    </ul>
+                    <p>(Спасибо огромное!)</p>
+                </section>
             } 
-        
-        </section>
-        }
+            {(data['stats'] || data['workingtitles']) &&
+                <section class="stats">
+            
+                <h3>Всякие факты</h3>
+                {
+                    data.stats && stats.map(onestat => <p>{onestat}</p>)
+                }
+                { data.workingtitles && 
+                    <p>Рабочие названия: {data.workingtitles.map((t: string) => quotize(t)).join(", ")}</p>
+                } 
+            
+            </section>
+            }
+        </div>
     </div>
     }
 

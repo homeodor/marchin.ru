@@ -15,7 +15,7 @@ body.release {
   text-align: center;
 }
 
-body.release .details section
+body.release .details .sectionholder
 {
   width:auto;
   display:inline-block;
@@ -107,7 +107,7 @@ body {
 hgroup {
   
   height: 100vh;
-  background: url('/public/mrch.jpg');
+  background: url('/mrch.jpg');
   background-color: #282a1a;
   background-position: 0% 30%;
   background-size: cover;
@@ -183,7 +183,7 @@ h1 {
   height: 3em;
 }
 
-.description>div {
+.description > div {
   display: inline-block;
   max-width: 900px;
   font-style: italic;
