@@ -1,7 +1,7 @@
 ---
 import Header from "../../components/header.astro";
 import Filter from "../../components/filter.astro";
-import * as Release from "../../ts/types";
+import * as ReleaseTypes from "../../ts/types";
 //@ts-expect-error
 import { existsSync } from "node:fs";
 
@@ -23,7 +23,7 @@ export function getStaticPaths() {
 const { release } = Astro.params;
 const releasePath = `../../releases/${release}.json`;
 
-const json = (await jsons[releasePath]()) as Release.Release;
+const json = (await jsons[releasePath]()) as ReleaseTypes.Release;
 const data = json.data;
 const detailsAvailable: any =
 	data.stats || data.tracklist || data.workingtitles;
@@ -100,6 +100,7 @@ onestat(stats, data.stats, "tracks", "Всего треков");
 onestat(stats, data.stats, "omissions", "Треков не вошло");
 onestat(stats, data.stats, "minutes", "Время звучания", "мин.");
 onestat(stats, data.stats, "startyear", "Год начала работы");
+onestat(stats, data.stats, "coverart", "Автор обложки");
 ---
 
 <!doctype html>
