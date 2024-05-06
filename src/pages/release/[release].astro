@@ -107,6 +107,15 @@ onestat(stats, data.stats, "startyear", "Год начала работы");
 	<head>
 		<title>{data.title}</title>
 		<Header />
+		<meta property="og:type" content="website">
+		<meta property="og:site_name" content="Марчин Кошка">
+		<meta property="og:title" content={data.title}>
+		{data.description && <meta property="og:description" content={data.description}>}
+		<meta property="og:url" content={`https://marchin.ru/release/${release}`}>
+		<meta property="og:locale" content="ru_RU">
+		<meta property="og:image" content={`https://marchin.ru/covers/${release}.jpg`}>
+		<meta property="og:image:width" content="3000">
+		<meta property="og:image:height" content="3000">
 		{css && <link rel="stylesheet" href={css} />}
 	</head>
 	<body class="release">
