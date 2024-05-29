@@ -1,4 +1,4 @@
-name: Astro Build
+name: Deploy
 
 on:
   push:
