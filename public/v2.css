@@ -230,3 +230,7 @@ h1 {
 		height: 2.7em;
 	}
 }
+
+img.feature {
+	max-height: 300px;
+}

@@ -36,3 +36,12 @@ export interface Release {
 	data: Data;
 	streaming: Streaming;
 }
+
+export interface Feature {
+	name: string,
+	knownFor?: string[],
+}
+
+export interface FeatureJson {
+	[index: string]: Feature;
+}

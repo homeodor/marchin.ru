@@ -3,11 +3,12 @@ import Header from "../components/header.astro";
 import Filter from "../components/filter.astro";
 import Glagne from "../components/glagne.astro";
 
-const releases = await Astro.glob("../releases/*.json");
+let releases = await Astro.glob("../releases/*.json");
 
 releases.sort(function (x, y) {
 	return x.data.year > y.data.year ? -1 : x.data.year < y.data.year ? 1 : 0;
 });
+releases = releases.filter(x => x.data.released == true);
 ---
 
 <!doctype html>

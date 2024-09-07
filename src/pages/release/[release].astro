@@ -4,6 +4,9 @@ import Filter from "../../components/filter.astro";
 import * as ReleaseTypes from "../../ts/types";
 //@ts-expect-error
 import { existsSync } from "node:fs";
+import * as featuresJson from "../../data/features.json"
+
+const features = featuresJson as ReleaseTypes.FeatureJson;
 
 const jsons = import.meta.glob("../../releases/*.json");
 
@@ -37,6 +40,11 @@ for (const streaming in json.streaming) {
 	streamings.push({ id: streaming, link: json.streaming[streaming] });
 }
 
+function featureToName(name: string)
+{
+	return features[name] ? features[name].name : name;
+}
+
 function track(track: any) {
 	if (typeof track == "object") {
 		if (track.feat || track.cover || track.version) {
@@ -44,13 +52,13 @@ function track(track: any) {
 
 			if (track.feat) {
 				if (Array.isArray(track.feat)) {
-					more.push(`feat. ${track.feat.join(", ")}`);
+					more.push(`feat. ${track.feat.forEach(featureToName).join(", ")}`);
 
 					for (const feat of track.feat) {
 						featuredArtists.push(feat);
 					}
 				} else {
-					more.push(`feat. ${track.feat}`);
+					more.push(`feat. ${featureToName(track.feat)}`);
 					featuredArtists.push(track.feat);
 				}
 			}
@@ -198,9 +206,24 @@ onestat(stats, data.stats, "coverart", "Автор обложки");
 								<p>В порядке появления на альбоме</p>
 								<ul>
 									{[...new Set(featuredArtists)].map(
-										(feat) => (
+										(feat) => {
+											if (features[feat])
+											{
+												const artistName = features[feat].name;
+												const imagePath = `public/features/${feat}.png`;
+												const imageExists = existsSync(imagePath);
+
+												if (imageExists)
+												{
+													return (<li><img class="feature" src=`/${imagePath}` /></li>);
+												} else {
+													return (<li>{artistName}</li>)
+												}
+											} else 
+											
+											return (
 											<li>{feat}</li>
-										),
+										)},
 									)}
 								</ul>
 								<p>(Спасибо огромное!)</p>
