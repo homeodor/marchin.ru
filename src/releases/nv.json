@@ -5,7 +5,9 @@
 		"year": 2016,
 		"kind": "EP/LP",
 		"description": "Наша жизнь — путешествие. Не пропусти свою остановку!",
-		"workingtitles": ["EP II"],
+		"workingtitles": [
+			"EP II"
+		],
 		"tracklist": [
 			{
 				"header": "LP (переиздание)",
