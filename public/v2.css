@@ -30,7 +30,7 @@ section.featured h3 {
 	margin-bottom: 0.2em;
 }
 
-section.featured > h3 + p {
+section.featured>h3+p {
 	margin-top: 0;
 	opacity: 0.5;
 	font-style: italic;
@@ -42,20 +42,16 @@ section.featured ul li {
 
 body.body-releases {
 	background: rgb(0, 77, 142);
-	background: linear-gradient(
-			119deg,
+	background: linear-gradient(119deg,
 			rgba(0, 77, 142, 1) 0%,
 			rgba(126, 46, 0, 1) 32%,
 			rgba(100, 41, 110, 1) 67%,
-			rgba(0, 125, 116, 1) 100%
-		),
-		linear-gradient(
-			230deg,
+			rgba(0, 125, 116, 1) 100%),
+		linear-gradient(230deg,
 			rgba(3, 178, 4, 1) 0%,
 			rgba(255, 243, 20, 1) 32%,
 			rgba(8, 207, 231, 1) 63%,
-			rgba(86, 104, 5, 1) 100%
-		);
+			rgba(86, 104, 5, 1) 100%);
 	background-blend-mode: hard-light;
 }
 
@@ -65,14 +61,14 @@ main.releases {
 	text-align: center;
 }
 
-main.releases > a {
+main.releases>a {
 	color: inherit;
 	border-bottom: none;
 	padding: 1.4em;
 	width: calc(23em + 1.4em);
 }
 
-main.releases > a img {
+main.releases>a img {
 	width: 23em;
 	height: 23em;
 }
@@ -121,7 +117,7 @@ hgroup {
 	background-size: cover;
 }
 
-hgroup > * {
+hgroup>* {
 	max-width: 50vh;
 }
 
@@ -142,6 +138,21 @@ hgroup a:not(:hover) span {
 	mix-blend-mode: color-dodge;
 }
 
+hgroup a span.overpsycho {
+	display: block;
+	position: absolute;
+	top: 5px;
+	left: 5px;
+	width: 100%;
+	height: 100%;
+	mix-blend-mode: color-burn;
+	color: #e48282
+}
+
+hgroup a span.overpsycho.special {
+	color: #00ff40;
+}
+
 hgroup a .bg {
 	display: block;
 	position: absolute;
@@ -149,11 +160,11 @@ hgroup a .bg {
 	left: 0;
 	width: 100%;
 	height: 100%;
-	content: "";
 	background-image: linear-gradient(90deg, #7c6f00, #a83c01);
 	mix-blend-mode: hard-light;
 }
 
+a:hover .psycho,
 .psycho:hover,
 .psycho-out:hover .psycho-in {
 	animation: squiggly-anim 0.15s linear infinite;
@@ -185,7 +196,7 @@ h1 {
 	flex-wrap: wrap;
 }
 
-.badges > * {
+.badges>* {
 	padding: 0.4em;
 	white-space: nowrap;
 }
@@ -198,7 +209,7 @@ h1 {
 	height: 3em;
 }
 
-.description > div {
+.description>div {
 	display: inline-block;
 	max-width: 900px;
 	font-style: italic;
@@ -222,7 +233,7 @@ h1 {
 		font-size: 0.4rem;
 	}
 
-	.badges > * {
+	.badges>* {
 		padding: 0 0.6em 0.4em 0;
 	}
 
