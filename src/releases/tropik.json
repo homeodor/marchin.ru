@@ -13,6 +13,10 @@
 		]
 	},
 	"streaming": {
-		"bandlink-presave": "https://band.link/MHBmU"
+		"bandlink": "https://band.link/MHBmU",
+		"yandex": "https://music.yandex.ru/album/33346442",
+		"vk": "https://vk.com/music/album/-2000972349_21972349_07cbb5a2304d762194",
+		"apple": "https://music.apple.com/album/%D1%82%D1%80%D0%BE%D0%BF%D0%B8%D0%BA-%D0%BA%D0%BE%D0%B7%D0%B5%D1%80%D0%BE%D0%B3%D0%B0-ep/1769338956",
+		"spotify": "https://open.spotify.com/album/0gZEyr5bmtfTR71IhjdB3o"
 	}
 }
