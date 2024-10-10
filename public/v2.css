@@ -132,6 +132,7 @@ hgroup * {
 
 hgroup a {
 	position: relative;
+	white-space: nowrap;
 }
 
 hgroup a:not(:hover) span {
@@ -141,12 +142,13 @@ hgroup a:not(:hover) span {
 hgroup a span.overpsycho {
 	display: block;
 	position: absolute;
-	top: 5px;
-	left: 5px;
+	top: 0.07em;
+	left: 0.07em;
 	width: 100%;
 	height: 100%;
 	mix-blend-mode: color-burn;
-	color: #e48282
+	color: #cfaeae;
+	z-index: 1
 }
 
 hgroup a span.overpsycho.special {
@@ -162,6 +164,12 @@ hgroup a .bg {
 	height: 100%;
 	background-image: linear-gradient(90deg, #7c6f00, #a83c01);
 	mix-blend-mode: hard-light;
+	z-index: 0;
+}
+
+hgroup a .psycho {
+	position: relative;
+	z-index: 10;
 }
 
 a:hover .psycho,
