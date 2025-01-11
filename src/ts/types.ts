@@ -24,9 +24,11 @@ export interface Stats {
 export interface Data {
 	id: string;
 	title: string;
+	subtitle: string;
 	year: number;
 	kind: string;
 	description: string;
+	coverby: string;
 	workingtitles: string[];
 	tracklist: Tracklist[];
 	stats: Stats;
