@@ -11,7 +11,7 @@ releases.sort(function (x, y) {
 ---
 
 <!doctype html>
-<html>
+<html lang="ru">
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<title>Релизы</title>
@@ -36,6 +36,11 @@ releases.sort(function (x, y) {
 							</span>
 						</h2>
 						<h3>
+							{release.data.subtitle && (
+								<>
+									<span>{release.data.subtitle}</span> <br />
+								</>
+							)}
 							{release.data.year} &bull; {release.data.kind}
 						</h3>
 					</a>

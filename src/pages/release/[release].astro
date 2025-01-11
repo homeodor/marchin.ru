@@ -4,6 +4,7 @@ import Filter from "../../components/filter.astro";
 import * as ReleaseTypes from "../../ts/types";
 //@ts-expect-error
 import { existsSync } from "node:fs";
+import Glagne from "../../components/glagne.astro";
 
 const jsons = import.meta.glob("../../releases/*.json");
 
@@ -26,7 +27,7 @@ const releasePath = `../../releases/${release}.json`;
 const json = (await jsons[releasePath]()) as ReleaseTypes.Release;
 const data = json.data;
 const detailsAvailable: any =
-	data.stats || data.tracklist || data.workingtitles;
+	data.stats || data.tracklist || data.workingtitles || data.coverby;
 const featuredArtists: string[] = [];
 const css = existsSync(`public/css/${release}.css`)
 	? `/css/${release}.css`
@@ -104,27 +105,41 @@ onestat(stats, data.stats, "coverart", "Автор обложки");
 ---
 
 <!doctype html>
-<html>
+<html lang="ru">
 	<head>
 		<title>{data.title}</title>
 		<Header />
-		<meta property="og:type" content="website">
-		<meta property="og:site_name" content="Марчин Кошка">
-		<meta property="og:title" content={data.title}>
-		{data.description && <meta property="og:description" content={data.description}>}
-		<meta property="og:url" content={`https://marchin.ru/release/${release}`}>
-		<meta property="og:locale" content="ru_RU">
-		<meta property="og:image" content={`https://marchin.ru/covers/${release}.jpg`}>
-		<meta property="og:image:width" content="3000">
-		<meta property="og:image:height" content="3000">
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content="Марчин Кошка" />
+		<meta property="og:title" content={data.title} />
+		{
+			data.description && (
+				<meta property="og:description" content={data.description} />
+			)
+		}
+		<meta
+			property="og:url"
+			content={`https://marchin.ru/release/${release}`}
+		/>
+		<meta property="og:locale" content="ru_RU" />
+		<meta
+			property="og:image"
+			content={`https://marchin.ru/covers/${release}.jpg`}
+		/>
+		<meta property="og:image:width" content="3000" />
+		<meta property="og:image:height" content="3000" />
 		{css && <link rel="stylesheet" href={css} />}
 	</head>
 	<body class="release">
 		<Filter />
 		<h1>{data.title}</h1>
+		{data.subtitle && <h1 class="subtitle">{data.subtitle}</h1>}
 		<h3 class="date">{data.year}</h3>
 		<div class="cover">
-			<img src={`/covers/${release}.jpg`} alt="" />
+			<div>
+				<img src={`/covers/${release}.jpg`} alt="" />
+			</div>
+			{data["coverby"] && <p class="coverby">Обложка: {data.coverby}</p>}
 		</div>
 		<div class="badges">
 			{
@@ -181,19 +196,36 @@ onestat(stats, data.stats, "coverart", "Автор обложки");
 				<div class="details">
 					<div class="sectionholder">
 						{data.tracklist && (
-							<section class="tracklist">{
-								data.tracklist.map((tracklistblock: any) =>
-						<h3>{tracklistblock?.header ?? "Треклист"}</h3>
-						<ol>
-						{
-							tracklistblock.tracks.map((trackObject: any) =>
-							{
-								const trackData = track(trackObject);
-								return (<li>{trackData.track} {trackData.feat && <span class="feat">{trackData.feat}</span>}</li>)
-							}
-							)
-						}
-						</ol>)}</section>
+							<section class="tracklist">
+								{data.tracklist.map((tracklistblock: any) => (
+									<>
+										<h3>
+											{tracklistblock?.header ??
+												"Треклист"}
+										</h3>
+										<ol>
+											{tracklistblock.tracks.map(
+												(trackObject: any) => {
+													const trackData =
+														track(trackObject);
+													return (
+														<li>
+															{trackData.track}{" "}
+															{trackData.feat && (
+																<span class="feat">
+																	{
+																		trackData.feat
+																	}
+																</span>
+															)}
+														</li>
+													);
+												},
+											)}
+										</ol>
+									</>
+								))}
+							</section>
 						)}
 						{featuredArtists.length !== 0 && (
 							<section class="featured">
