@@ -117,7 +117,7 @@ hgroup {
 	height: 100vh;
 	background: url("/mrch.jpg");
 	background-color: #282a1a;
-	background-position: 0% 30%;
+	background-position: 23% 30%;
 	background-size: cover;
 }
 
@@ -127,7 +127,7 @@ hgroup > * {
 
 hgroup * {
 	text-transform: uppercase;
-	font-size: 5vh;
+	font-size: 4.7vh;
 	margin: 0;
 	padding: 0;
 	list-style: none;
@@ -286,6 +286,7 @@ h1 {
 	left: 0;
 	width: 100%;
 	z-index: 999;
+	font-size:80%;
 	text-shadow: rgba(0,0,0,0.7) 0.1em 0.1em 0.6em;
-	opacity: 0.8;
+	opacity: 0.4;
 }
