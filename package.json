@@ -12,6 +12,8 @@
 	"dependencies": {
 		"@astrojs/check": "^0.4.1",
 		"astro": "^4.16.18",
+		"solid-js": "^1.9.5",
+		"three": "^0.174.0",
 		"typescript": "^5.7.2"
 	},
 	"devDependencies": {
