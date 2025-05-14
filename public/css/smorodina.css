@@ -1,0 +1,43 @@
+body {
+	background-color: #d2d8e2;
+	--main-color: #1c2330;
+	color: var(--main-color);
+	font-family: 'Bellota', sans-serif;
+}
+
+body.main {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	background: url("/smorodina-bg.jpg") no-repeat center center fixed;
+	background-size: cover;
+}
+
+main {
+	text-align: center;
+	background-color: rgba(255, 255, 255, 0.75); /* light semi-transparent background */
+	padding: 2rem 3rem;
+	box-shadow: 0 0 30px rgba(0, 0, 0, 0.15);
+	backdrop-filter: blur(8px);
+}
+
+h1 {
+	font-size: 2.5rem;
+	margin-bottom: 1rem;
+}
+
+a {
+	color: #9c2c6a; /* muted berry tone */
+    font-style: italic;
+    text-decoration: underline;
+    border:none;
+}
+
+a:hover {
+	color: #c9428e;
+}
+
+p {
+	margin: 1rem 0;
+}
