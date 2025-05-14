@@ -1,6 +1,7 @@
 {
 	"data": {
 		"id": "toolate",
+		"subtitle": "feat. Violet Verigo",
 		"title": "Too Late to Love You",
 		"year": 2025,
 		"kind": "Single",
@@ -8,6 +9,10 @@
 		"coverby": "Ира Гурова"
 	},
 	"streaming": {
-		"bandlink-presave": "https://band.link/toolatetoloveyou"
+		"bandlink": "https://band.link/toolatetoloveyou",
+		"yandex": "https://music.yandex.ru/album/34900110",
+		"vk": "https://vk.com/music/album/-2000934107_22934107_83f662d5f5e8ce980b",
+		"apple": "https://music.apple.com/us/album/too-late-to-love-you-feat-violet-verigo-single/1789084879",
+		"spotify": "https://open.spotify.com/album/3d9PQv1dtLouQohW047HCD"
 	}
 }
