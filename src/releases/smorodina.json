@@ -7,6 +7,10 @@
 		"description": "Духота электрички и простор загородных вечеринок, одиночество в шумной компании, весенний цвет и ощущение перемен. Белая кожа, по которой ползёт тень от смородиновой ветви, утро, где ты уже один, последнее сообщение, которое ты так и не отправишь."
 	},
 	"streaming": {
-		"bandlink-presave": "https://band.link/smorodinasingle"
+		"bandlink": "https://band.link/smorodinasingle",
+		"yandex": "https://music.yandex.ru/album/36620264/track/139142902",
+		"vk": "https://vk.com/audio-2001647104_136647104",
+		"apple": "https://music.apple.com/ru/song/%D1%81%D0%BC%D0%BE%D1%80%D0%BE%D0%B4%D0%B8%D0%BD%D0%B0/1813382649",
+		"spotify": "https://open.spotify.com/track/7jpBJxK7cFwPlyO24FdUxy"
 	}
 }
