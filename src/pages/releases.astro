@@ -6,7 +6,9 @@ import Glagne from "../components/glagne.astro";
 const releases = await Astro.glob("../releases/*.json");
 
 releases.sort(function (x, y) {
-	return x.data.year > y.data.year ? -1 : x.data.year < y.data.year ? 1 : 0;
+	const xMonths = x.data.year * 12 + (x.data.month ?? 1);
+	const yMonths = y.data.year * 12 + (y.data.month ?? 1);
+	return xMonths > yMonths ? -1 : xMonths < yMonths ? 1 : 0;
 });
 ---
 

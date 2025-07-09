@@ -1,0 +1,61 @@
+html {
+	min-height: 100%;
+}
+
+body {
+	background: linear-gradient(10deg, #4e2323, #0c172a);
+	min-height: 100%;
+	--main-color: #C684A2;
+	color: var(--main-color);
+}
+
+body.main {
+	font-family: 'Dela Gothic One', sans-serif;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	background: url("/myzarya-bg.jpg") no-repeat 30% center fixed;
+	background-size: cover;
+}
+
+main {
+	text-align: center;
+	background-color: #0b010ed6;
+	color: #b686bd;
+	padding: 2rem 3rem;
+	box-shadow: 0 0 30px rgba(0, 0, 0, 0.15);
+	backdrop-filter: blur(8px);
+	border-radius: 0.2em;
+}
+
+h1 {
+	font-size: 2.5rem;
+	margin-bottom: 1rem;
+	background: linear-gradient(80deg, #b14490, #ff6b1b);
+	background-clip: text;
+	color: transparent;
+}
+
+h1>.smaller {
+	font-size: 63%;
+	padding-bottom: 0.3em;
+	display: inline-block
+}
+
+/* h1 > .sticky { line-height: 0.3em; } */
+
+a {
+	color: #ff8641;
+
+	text-decoration: underline;
+	border: none;
+}
+
+a:hover {
+	color: #ff6810;
+}
+
+p {
+	margin: 1rem 0;
+}
