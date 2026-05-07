@@ -1,0 +1,262 @@
+:root {
+	--bg-0: #0c111b;
+	--bg-1: #10192a;
+	--surface: rgba(255, 255, 255, 0.06);
+	--surface-strong: rgba(255, 255, 255, 0.12);
+	--text: #eaf1ff;
+	--text-muted: #b0bfd8;
+	--accent: #52e6b7;
+	--accent-2: #4cb7ff;
+	--border: rgba(255, 255, 255, 0.18);
+	--shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+}
+
+* {
+	box-sizing: border-box;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+	line-height: 1.5;
+	color: var(--text);
+	background:
+		radial-gradient(1200px 700px at 8% -10%, #1c3d56 0%, transparent 68%),
+		radial-gradient(900px 600px at 110% 10%, #3d2048 0%, transparent 62%),
+		linear-gradient(165deg, var(--bg-0), var(--bg-1));
+	background-attachment: fixed;
+}
+
+a,
+.pseudo-a,
+.unreal {
+	color: var(--accent);
+	text-decoration: none;
+	border-bottom: 1px solid color-mix(in oklab, var(--accent), transparent 55%);
+	transition: color 160ms ease, border-color 160ms ease;
+}
+
+a:hover,
+.pseudo-a:hover,
+.unreal:hover {
+	color: var(--accent-2);
+	border-color: color-mix(in oklab, var(--accent-2), transparent 50%);
+}
+
+.main {
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+}
+
+hgroup {
+	min-height: 100vh;
+	display: grid;
+	align-content: center;
+	gap: 0.6rem;
+	padding: clamp(1.25rem, 3vw, 2.6rem);
+	background: linear-gradient(rgba(4, 10, 20, 0.52), rgba(4, 10, 20, 0.62)), url("/mrch.jpg") center 28% / cover;
+}
+
+hgroup h1 {
+	font-family: "IBM Plex Sans Condensed", "IBM Plex Sans", sans-serif;
+	font-size: clamp(2.6rem, 8vw, 5.3rem);
+	line-height: 0.92;
+	letter-spacing: 0.03em;
+	margin: 0 0 1.2rem;
+	text-transform: uppercase;
+	max-width: 8.5ch;
+}
+
+hgroup menu {
+	margin: 0;
+	padding: 0;
+}
+
+hgroup a {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+	font-weight: 600;
+	font-size: clamp(1rem, 3.4vw, 1.45rem);
+	padding: 0.2rem 0;
+	border: 0;
+}
+
+hgroup .bg,
+hgroup .overpsycho {
+	display: none;
+}
+
+.main footer {
+	padding: 1rem 1.25rem 1.6rem;
+	font-size: 0.86rem;
+	color: var(--text-muted);
+}
+
+.body-releases {
+	padding: clamp(1rem, 3vw, 2rem);
+}
+
+.releases,
+.shows {
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+.releases {
+	display: grid;
+	gap: 1.2rem;
+	grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+}
+
+.releases > a {
+	display: block;
+	padding: 0.9rem;
+	border-radius: 16px;
+	background: var(--surface);
+	box-shadow: var(--shadow);
+	border: 1px solid var(--border);
+	color: inherit;
+	border-bottom: 1px solid var(--border);
+}
+
+.releases .cover img {
+	width: 100%;
+	aspect-ratio: 1;
+	object-fit: cover;
+	border-radius: 12px;
+}
+
+.releases h2 {
+	margin: 0.8rem 0 0.35rem;
+	font-size: 1.08rem;
+}
+
+.releases h3 {
+	margin: 0;
+	font-size: 0.92rem;
+	color: var(--text-muted);
+	font-weight: 500;
+}
+
+.release {
+	padding: clamp(1rem, 3vw, 2rem);
+	max-width: 1080px;
+	margin: 0 auto;
+}
+
+.release h1 {
+	margin: 0;
+	font-family: "IBM Plex Sans Condensed", "IBM Plex Sans", sans-serif;
+	font-size: clamp(1.8rem, 5vw, 3rem);
+	line-height: 1;
+}
+
+.release .subtitle {
+	margin-top: 0.3rem;
+	opacity: 0.75;
+	font-weight: 500;
+}
+
+.release .date {
+	margin: 0.55rem 0 0;
+	font-size: 0.95rem;
+	color: var(--text-muted);
+	font-weight: 500;
+}
+
+.cover {
+	margin-top: 1rem;
+}
+
+.cover img,
+.coverby {
+	width: min(100%, 640px);
+}
+
+.cover img {
+	border-radius: 14px;
+	box-shadow: var(--shadow);
+}
+
+.coverby {
+	margin: 0.55rem auto 0;
+	text-align: right;
+	font-size: 0.9rem;
+	color: var(--text-muted);
+}
+
+.badges {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.65rem;
+	margin-top: 1.2rem;
+}
+
+.badges .badge {
+	background: var(--surface);
+	border: 1px solid var(--border);
+	border-radius: 12px;
+	padding: 0.35rem 0.45rem;
+}
+
+.badges a.img {
+	border: 0;
+}
+
+.badges img {
+	height: 2.55rem;
+	display: block;
+}
+
+.description {
+	margin-top: 1rem;
+	color: var(--text-muted);
+}
+
+.description > div {
+	max-width: 75ch;
+}
+
+.details {
+	margin-top: 1.4rem;
+	padding: 1rem;
+	background: var(--surface);
+	border-radius: 14px;
+	border: 1px solid var(--border);
+}
+
+.details .sectionholder {
+	display: grid;
+	gap: 1.1rem;
+}
+
+.details h3 {
+	margin: 0 0 0.55rem;
+}
+
+.details p,
+.details li {
+	color: var(--text-muted);
+}
+
+.feat {
+	opacity: 0.85;
+	font-style: italic;
+}
+
+@media (max-width: 700px) {
+	.badges img {
+		height: 2.25rem;
+	}
+
+	.releases {
+		grid-template-columns: 1fr;
+	}
+}

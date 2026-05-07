@@ -1,6 +1,18 @@
 ---
 import Header from "../components/header.astro";
-import Filter from "../components/filter.astro";
+import HeroCard from "../components/home/HeroCard.astro";
+import MusicCard from "../components/home/MusicCard.astro";
+import LiveCard from "../components/home/LiveCard.astro";
+import SocialCard from "../components/home/SocialCard.astro";
+
+const releaseModules = import.meta.glob("../releases/*.json", { eager: true });
+const releases = Object.values(releaseModules)
+	.map((entry: any) => entry.data)
+	.sort((x: any, y: any) => {
+		const xMonths = x.year * 12 + (x.month ?? 1);
+		const yMonths = y.year * 12 + (y.month ?? 1);
+		return xMonths > yMonths ? -1 : xMonths < yMonths ? 1 : 0;
+	});
 ---
 
 <!doctype html>
@@ -8,102 +20,361 @@ import Filter from "../components/filter.astro";
 	<head>
 		<title>Марчин Кошка</title>
 		<Header />
-		<meta name="ag:test" content="Test okay" />
 	</head>
-	<body class="main">
-		<Filter />
-		<hgroup>
-			<h1>Марчин<br />Кошка</h1>
-			<!-- <menu>
-				<a href="/release/tropik/">
-					<div class="bg"></div>
-					<span class="psycho">Тропик Козерога</span>
-					<span class="overpsycho special">Тропик Козерога</span>
-				</a>
-			</menu> -->
-			<!-- <menu>
-				<a href="/whois/">
-					<div class="bg"></div>
-					<span class="psycho">↑ Кто это</span>
-					<span class="overpsycho">↑ Кто это</span>
-				</a>
-			</menu> -->
-			<!-- <menu class="group-end">
-				<a href="https://marchin.timepad.ru/event/3232679/">
-					<div class="bg"></div>
-					<span class="psycho">Концерт!</span>
-					<span class="overpsycho">Концерт!</span>
-				</a>
-			</menu> -->
-			<menu class="group-end">
-				<a href="/releases/">
-					<div class="bg"></div>
-					<span class="psycho">Релизы</span>
-					<span class="overpsycho">Релизы</span>
-				</a>
-			</menu>
-			<menu>
-				<a href="https://music.yandex.ru/artist/7049418">
-					<div class="bg"></div>
-					<span class="psycho">Я.Музыка</span>
-					<span class="overpsycho">Я.Музыка</span>
-				</a>
-			</menu>
-			<menu>
-				<a
-					href="https://music.apple.com/us/artist/%D0%BC%D0%B0%D1%80%D1%87%D0%B8%D0%BD-%D0%BA%D0%BE%D1%88%D0%BA%D0%B0/1454612862"
-				>
-					<div class="bg"></div>
-					<span class="psycho">Эппл Мьюзик</span>
-					<span class="overpsycho">Эппл Мьюзик</span>
-				</a>
-			</menu>
-			<menu class="group-end">
-				<a
-					href="https://open.spotify.com/artist/7tgA0ye0kGXPMs8zCnonp5?si=5opvxnQHRe6XAL_FKKg4Bw"
-				>
-					<div class="bg"></div>
-					<span class="psycho">Спотифай</span>
-					<span class="overpsycho">Спотифай</span>
-				</a>
-			</menu>
-			<menu>
-				<a href="https://t.me/marchin_koshka">
-					<div class="bg"></div>
-					<span class="psycho">Телеграм</span>
-					<span class="overpsycho">Телеграм</span>
-				</a>
-			</menu>
-			<menu>
-				<a href="https://vk.com/marchin_koshka">
-					<div class="bg"></div>
-					<span class="psycho">ВК</span>
-					<span class="overpsycho">ВК</span>
-				</a>
-			</menu>
-			<menu>
-				<a href="https://youtube.com/@marchin_koshka">
-					<div class="bg"></div>
-					<span class="psycho">Ютуб</span>
-					<span class="overpsycho">Ютуб</span>
-				</a>
-			</menu>
-			<menu>
-				<a href="https://tiktok.com/@marchin_koshka">
-					<div class="bg"></div>
-					<span class="psycho">Тикток</span>
-					<span class="overpsycho">Тикток</span>
-				</a>
-			</menu>
-			<menu>
-				<a href="https://instagram.com/marchin_koshka">
-					<div class="bg"></div>
-					<span class="psycho">И*******м</span>
-					<span class="overpsycho">И*******м</span>
-				</a>
-			</menu>
-		</hgroup>
+	<body class="landing-page">
+		<div class="top-nav-container">
+			<nav class="top-nav" id="top-nav">
+				<div class="top-nav-inner">
+					<a href="#card-hero" data-nav-link="hero">Главная</a>
+					<a href="#card-releases" data-nav-link="releases">Музыка</a>
+					<a href="#card-live" data-nav-link="live">Вживую</a>
+					<a href="#card-socials" data-nav-link="socials">Соцсети</a>
+					<span class="nav-dot" id="nav-dot" aria-hidden="true"
+					></span>
+				</div>
+			</nav>
+		</div>
 
-		<footer>© 2014—2025, Александр Голованов</footer>
+		<main class="landing">
+			<HeroCard />
+			<MusicCard releases={releases} />
+			<LiveCard />
+			<SocialCard />
+		</main>
+
+		<script>
+			const topNav = document.getElementById("top-nav");
+			const topNavInner = document.querySelector(".top-nav-inner");
+			const dot = document.getElementById("nav-dot");
+			const navLinks = [
+				...document.querySelectorAll<HTMLAnchorElement>(
+					"a[data-nav-link]",
+				),
+			];
+			const cards = [
+				...document.querySelectorAll<HTMLElement>("section[data-card]"),
+			];
+			const filterRoot = document.getElementById("release-filter");
+			const pill = document.getElementById("release-filter-pill");
+			const gridWrap = document.getElementById("release-grid-wrap");
+			const grid = document.getElementById("release-grid");
+			const releaseTiles = [
+				...document.querySelectorAll<HTMLAnchorElement>(
+					"a.release-tile",
+				),
+			];
+
+			if (
+				!(topNav instanceof HTMLElement) ||
+				!(topNavInner instanceof HTMLElement) ||
+				!(dot instanceof HTMLElement) ||
+				!(filterRoot instanceof HTMLElement) ||
+				!(pill instanceof HTMLElement) ||
+				!(gridWrap instanceof HTMLElement) ||
+				!(grid instanceof HTMLElement)
+			) {
+				throw new Error("Landing page UI was not initialized");
+			}
+
+			const filterButtons = [
+				...filterRoot.querySelectorAll<HTMLButtonElement>(
+					"button[data-filter]",
+				),
+			];
+
+			const filterMatch = (kind: string, filter: string): boolean => {
+				const value = (kind || "").toLowerCase();
+				if (filter === "all") return true;
+				if (filter === "lp") return value.includes("lp");
+				if (filter === "ep") return value.includes("ep");
+				if (filter === "single") return value.includes("single");
+				if (filter === "remix") return value.includes("remix");
+				return true;
+			};
+
+			const updatePill = (button: HTMLButtonElement): void => {
+				const rootRect = filterRoot.getBoundingClientRect();
+				const buttonRect = button.getBoundingClientRect();
+				const offsetX = buttonRect.left - rootRect.left;
+				const offsetY = buttonRect.top - rootRect.top;
+				pill.style.width = `${buttonRect.width}px`;
+				pill.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+			};
+
+			const updateGridHeight = () => {
+				gridWrap.style.height = `${grid.scrollHeight}px`;
+			};
+
+			const applyFilter = (filter: string): void => {
+				filterButtons.forEach((button) => {
+					const active = button.dataset.filter === filter;
+					button.classList.toggle("is-active", active);
+					if (active) updatePill(button);
+				});
+
+				releaseTiles.forEach((tile) => {
+					const visible = filterMatch(
+						tile.dataset.kind ?? "",
+						filter,
+					);
+					if (visible) {
+						tile.hidden = false;
+						requestAnimationFrame(() =>
+							tile.classList.remove("is-hidden"),
+						);
+						return;
+					}
+
+					tile.classList.add("is-hidden");
+					window.setTimeout(() => {
+						if (tile.classList.contains("is-hidden"))
+							tile.hidden = true;
+					}, 320);
+				});
+
+				window.requestAnimationFrame(updateGridHeight);
+			};
+
+			filterButtons.forEach((button) => {
+				button.addEventListener("click", () =>
+					applyFilter(button.dataset.filter ?? "all"),
+				);
+			});
+
+			let currentNavLink: HTMLAnchorElement | null = null;
+
+			const placeNavDot = (link: HTMLAnchorElement): void => {
+				const offsetLeft = link.offsetLeft;
+				const width = link.offsetWidth;
+				dot.style.width = `${width * 0.2}px`;
+				dot.style.transform = `translateX(${offsetLeft + width * 0.4}px)`;
+			};
+
+			const moveDot = (targetId: string): void => {
+				const link = navLinks.find(
+					(item) => item.dataset.navLink === targetId,
+				);
+				if (
+					!(link instanceof HTMLAnchorElement) ||
+					!(link.parentElement instanceof HTMLElement)
+				)
+					return;
+				currentNavLink = link;
+				placeNavDot(link);
+				link.scrollIntoView({
+					behavior: "smooth",
+					block: "nearest",
+					inline: "center",
+				});
+				navLinks.forEach((item) =>
+					item.classList.toggle("is-current", item === link),
+				);
+			};
+
+			topNavInner.addEventListener("scroll", () => {
+				if (currentNavLink) placeNavDot(currentNavLink);
+			});
+
+			const intersection = new IntersectionObserver(
+				(entries) => {
+					const visible = entries
+						.filter((entry) => entry.isIntersecting)
+						.sort(
+							(a, b) => b.intersectionRatio - a.intersectionRatio,
+						)[0];
+					if (!(visible?.target instanceof HTMLElement)) return;
+					const cardId = visible.target.dataset.card ?? "hero";
+					moveDot(cardId);
+					topNav.classList.toggle("is-visible", cardId !== "hero");
+				},
+				{ threshold: [0.35, 0.55, 0.75] },
+			);
+
+			cards.forEach((card) => intersection.observe(card));
+			window.addEventListener("resize", () => {
+				const active = navLinks.find((item) =>
+					item.classList.contains("is-current"),
+				);
+				if (active) moveDot(active.dataset.navLink ?? "hero");
+				const activeFilter = filterButtons.find((item) =>
+					item.classList.contains("is-active"),
+				);
+				if (activeFilter) updatePill(activeFilter);
+				updateGridHeight();
+			});
+
+			applyFilter("all");
+			moveDot("hero");
+			updateGridHeight();
+		</script>
 	</body>
 </html>
+
+<style>
+	:global(html),
+	:global(body) {
+		background: #080808;
+		height: 100%;
+	}
+
+	:global(body)::before {
+		content: "";
+		position: fixed;
+		inset: 0;
+		background:
+			linear-gradient(to top, rgba(8, 8, 8, 0.62), rgba(8, 8, 8, 0.2)),
+			url("/mrch.jpg") center 28% / cover no-repeat;
+		z-index: -1;
+		pointer-events: none;
+	}
+
+	:global(.landing-page) {
+		margin: 0;
+		padding: 0;
+		overflow-x: hidden;
+		background: transparent;
+	}
+
+	.top-nav-container {
+		position: fixed;
+		inset: 0;
+		top: 0;
+		left: 0;
+		z-index: 40;
+		background: transparent;
+		height: 100%;
+		width: 100%;
+		pointer-events: none;
+	}
+
+	.top-nav {
+		z-index: 40;
+		padding: 0.7em var(--main-space);
+		transform: translateY(-130%);
+		opacity: 0;
+		transition:
+			transform 320ms ease,
+			opacity 320ms ease;
+		pointer-events: none;
+		overflow: hidden;
+		background: transparent !important;
+	}
+
+	.top-nav.is-visible {
+		transform: translateY(0);
+		opacity: 1;
+		pointer-events: auto;
+	}
+
+	.top-nav-inner {
+		position: relative;
+		display: flex;
+		gap: 1.2em;
+		width: 100%;
+		max-width: min(100%, 48rem);
+		padding: 0.6em 1em 1.1em;
+		margin-top: max(0em, env(safe-area-inset-top));
+		border: 1px solid var(--line);
+		border-radius: 999em;
+		background:
+			linear-gradient(
+				170deg,
+				rgba(255, 116, 0, 0.64),
+				rgba(255, 0, 174, 0.42)
+			),
+			rgba(255, 246, 204, 0.9);
+		-webkit-backdrop-filter: blur(0.65em) saturate(1.35);
+		backdrop-filter: blur(0.65em) saturate(1.35);
+		box-shadow:
+			inset 0 0 0 0.08em rgba(255, 225, 167, 0.65),
+			0.22em 0.22em 0 #2e0627;
+		overflow-x: auto;
+		overflow-y: hidden;
+		scrollbar-width: none;
+		white-space: nowrap;
+	}
+
+	/* iOS Safari fallback: avoid fixed+backdrop compositing bar in safe area */
+	@supports (-webkit-touch-callout: none) {
+		.top-nav-inner {
+		}
+	}
+
+	.top-nav-inner::-webkit-scrollbar {
+		display: none;
+	}
+
+	:global(.top-nav a) {
+		font-family: var(--font-title);
+		font-size: clamp(0.95rem, 1.2vw, 1.05rem);
+		letter-spacing: 0.05em;
+		text-decoration: none;
+		opacity: 0.8;
+		color: #101018;
+		transform: skewX(-10deg);
+		text-shadow: 0.09em 0.09em 0 #ffa3ec;
+	}
+
+	:global(.top-nav a.is-current) {
+		opacity: 1;
+	}
+
+	:global(.nav-dot) {
+		position: absolute;
+		bottom: 0.5em;
+		left: 0;
+		height: 0.42em;
+		width: 1em;
+		border-radius: 999em;
+		background: linear-gradient(120deg, #ff153f, #ff7e29);
+		box-shadow: 0.12em 0.12em 0 #5a0015;
+		transition:
+			transform 280ms cubic-bezier(0.22, 1, 0.36, 1),
+			width 280ms ease;
+	}
+
+	:global(.landing) {
+		display: flex;
+		flex-direction: column;
+		gap: 0;
+		padding: 0;
+		margin: 0;
+		position: relative;
+		top: 0;
+		background:
+			radial-gradient(
+				78vw 54vw at 55% 118%,
+				rgba(255, 226, 0, 0.46) 0%,
+				rgba(255, 226, 0, 0.2) 36%,
+				transparent 72%
+			),
+			linear-gradient(
+				180deg,
+				rgba(8, 8, 8, 0.08) 0%,
+				rgba(8, 8, 8, 0.38) 46%,
+				rgba(8, 8, 8, 0.78) 100%
+			),
+			#080808;
+	}
+
+	:global(.card) {
+		position: relative;
+		min-height: 100dvh;
+		padding: clamp(1em, 3vw, 2.2em);
+		border-radius: 0;
+		overflow: clip;
+		box-shadow: none;
+		border: 0;
+		isolation: isolate;
+	}
+
+	@media (max-width: 42em) {
+		.top-nav-inner {
+			gap: 0.8em;
+		}
+
+		:global(.top-nav a) {
+			font-size: 0.9rem;
+		}
+	}
+</style>

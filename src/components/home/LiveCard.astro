@@ -1,0 +1,242 @@
+<section class="card card-live" id="card-live" data-card="live">
+	<header class="card-header">
+		<h2>Вживую</h2>
+	</header>
+
+	<h3>Ближайшие мероприятия</h3>
+	<table
+		class="events-table upcoming-table"
+		aria-label="Ближайшие мероприятия"
+	>
+		<tbody>
+			<tr>
+				<td class="date-cell date-main">
+					24.08<br />
+					<span class="date-year">2026</span>
+				</td>
+				<td class="event-main">Концерт-X: десятилетие выступления в «Керосине»</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h3>Как оно бывает</h3>
+	<p>Плейлист на ютубе покажет лучшие образцы!</p>
+	<div class="playlist-wrap">
+		<iframe
+			src="https://www.youtube.com/embed/videoseries?si=bJukk6LbVkDE8MwF&list=PLsmYqNeGLnSMP26y2A-A6Nk9-4sL-va1I"
+			title="YouTube video player"
+			allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+			referrerpolicy="strict-origin-when-cross-origin"
+			allowfullscreen></iframe>
+	</div>
+
+	<h3>Было и прошло</h3>
+	<table class="events-table past-events" aria-label="Было и прошло">
+		<tbody>
+			<tr>
+				<td class="date-cell past-date">
+					19.04<br />
+					<span class="past-year">2026</span>
+				</td>
+				<td class="past-title">Фестиваль «Откуда звук?»</td>
+			</tr>
+			<tr>
+				<td class="date-cell past-date">
+					10.10<br />
+					<span class="past-year">2025</span>
+				</td>
+				<td class="past-title">Осенний концерт в «Мунке»</td>
+			</tr>
+			<tr>
+				<td class="date-cell past-date">
+					28.02<br />
+					<span class="past-year">2025</span>
+				</td>
+				<td class="past-title">Весенний концерт «Мунке»</td>
+			</tr>
+			<tr>
+				<td class="date-cell past-date">
+					9.05<br />
+					<span class="past-year">2022</span>
+				</td>
+				<td class="past-title">«Руинрейв» (Ковров)</td>
+			</tr>
+			<tr>
+				<td class="date-cell past-date">
+					10.02<br />
+					<span class="past-year">2022</span>
+				</td>
+				<td class="past-title">Концерт в «Успехе»</td>
+			</tr>
+			<tr>
+				<td class="date-cell past-date">
+					3.04<br />
+					<span class="past-year">2020</span>
+				</td>
+				<td class="past-title">
+					«Одиночество и картошка»: самоизоляционный концерт-стрим
+				</td>
+			</tr>
+			<tr>
+				<td class="date-cell past-date">
+					26.07<br />
+					<span class="past-year">2019</span>
+				</td>
+				<td class="past-title">Фестиваль «ДжемФест»</td>
+			</tr>
+			<tr>
+				<td class="date-cell past-date">
+					27.03<br />
+					<span class="past-year">2019</span>
+				</td>
+				<td class="past-title">
+					«Стокгольмский синдром» (Китайский лётчик Джао Да)
+				</td>
+			</tr>
+			<tr>
+				<td class="date-cell past-date">
+					22.03<br />
+					<span class="past-year">2017</span>
+				</td>
+				<td class="past-title">Концерт в «Китайском лётчике Джао Да»</td
+				>
+			</tr>
+			<tr>
+				<td class="date-cell past-date">
+					24.08<br />
+					<span class="past-year">2016</span>
+				</td>
+				<td class="past-title">Концерт в «Керосине»</td>
+			</tr>
+		</tbody>
+	</table>
+</section>
+
+<style>
+	.card-live {
+		color: #e9f3ff;
+		background:
+			radial-gradient(
+				70vw 42vw at 10% -10%,
+				rgba(29, 112, 255, 0.42),
+				transparent 70%
+			),
+			radial-gradient(
+				70vw 40vw at 110% 20%,
+				rgba(0, 203, 255, 0.25),
+				transparent 72%
+			),
+			radial-gradient(
+				70vw 50vw at 50% 110%,
+				rgba(0, 0, 0, 0.4),
+				transparent 75%
+			),
+			linear-gradient(160deg, #070d1f, #0d1730 45%, #090b14 100%);
+	}
+
+	.card-live .card-header h2,
+	.card-live h3 {
+		font-family: var(--font-title);
+		font-style: oblique 12deg;
+		letter-spacing: 0.04em;
+	}
+
+	.card-live .card-header h2 {
+		margin: 0 0 0.85em;
+		font-size: clamp(1.55rem, 4vw, 2.7rem);
+		text-shadow:
+			0.09em 0.09em 0 #ff1e3a,
+			-0.04em -0.04em 0 #2ca5ff;
+	}
+
+	.events-table {
+		width: fit-content;
+		border-collapse: collapse;
+	}
+
+	.events-table td {
+		padding: 0.28em 0.95em 0.48em 0;
+		vertical-align: top;
+	}
+
+	.date-cell {
+		text-align: right;
+		white-space: nowrap;
+		padding-right: 1.05em;
+	}
+
+	.upcoming-table {
+		margin-bottom: 1.25em;
+	}
+
+	.date-main,
+	.date-year {
+		font-family: var(--font-title);
+		font-style: oblique 10deg;
+		letter-spacing: 0.04em;
+	}
+
+	.date-main {
+		font-size: clamp(1.2rem, 3vw, 1.7rem);
+	}
+
+	.event-main {
+		font-size: clamp(1.1rem, 2.5vw, 1.45rem);
+		font-weight: 700;
+		align-self: end;
+	}
+
+	.date-year {
+		font-size: clamp(0.95rem, 2.3vw, 1.15rem);
+		opacity: 0.9;
+	}
+
+	.event-empty {
+		opacity: 0.7;
+	}
+
+	.playlist-wrap {
+		margin-bottom: 1.25em;
+	}
+
+	.playlist-wrap iframe {
+		width: min(100%, 48em);
+		aspect-ratio: 16 / 9;
+		border: 1px solid rgba(180, 215, 255, 0.45);
+		border-radius: 0.9em;
+		background: #000;
+	}
+
+	.past-events {
+		margin: 0;
+		padding: 0;
+		max-width: 62rem;
+		display: table;
+	}
+
+	.past-events tr + tr td {
+		padding-top: 0.62em;
+	}
+
+	.past-date,
+	.past-year {
+		font-family: var(--font-title);
+		font-style: oblique 9deg;
+		letter-spacing: 0.03em;
+		opacity: 0.9;
+	}
+
+	.past-date {
+		font-size: 0.9rem;
+	}
+
+	.past-title {
+		font-size: 1rem;
+		opacity: 0.92;
+	}
+
+	.past-year {
+		font-size: 0.76rem;
+		opacity: 0.72;
+	}
+</style>
