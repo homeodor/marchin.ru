@@ -1,0 +1,150 @@
+<section class="card card-hero" id="card-hero" data-card="hero">
+	<div class="card-overlay"></div>
+	<div class="hero-body">
+		<h1>Марчин Кошка</h1>
+		<div class="hero-nav-wrap">
+			<div class="hero-nav">
+				<a href="#card-releases">Музыка</a>
+				<a href="#card-live">Вживую</a>
+				<a href="#card-socials">Соцсети</a>
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	.card-hero {
+		margin-top: 0;
+		display: flex;
+		align-items: flex-end;
+		background:
+			linear-gradient(to top, rgba(255, 0, 145, 0.34), rgba(255, 235, 0, 0.16)),
+			url("/mrch.jpg") center 28% / cover;
+	}
+
+	.card-hero::before {
+		content: "";
+		position: absolute;
+		inset: auto auto 6% -10%;
+		width: 68vw;
+		height: 38vh;
+		background: #efe8dc;
+		clip-path: polygon(0 28%, 90% 0, 100% 75%, 12% 100%);
+		mix-blend-mode: multiply;
+		opacity: 0.35;
+		z-index: 1;
+	}
+
+	.card-overlay {
+		position: absolute;
+		inset: 0;
+		background:
+			radial-gradient(
+				70vw 45vw at 120% 90%,
+				rgba(255, 0, 119, 0.88),
+				transparent 64%
+			),
+			radial-gradient(
+				56vw 42vw at -5% 5%,
+				rgba(0, 255, 255, 0.76),
+				transparent 62%
+			),
+			radial-gradient(
+				48vw 26vw at 50% 100%,
+				rgba(255, 230, 0, 0.76),
+				transparent 60%
+			);
+		pointer-events: none;
+	}
+
+	.hero-body {
+		position: relative;
+		z-index: 2;
+		width: min(80em, 100%);
+	}
+
+	.hero-body h1 {
+		font-family: var(--font-title);
+		font-size: clamp(2.5rem, 12vw, 7rem);
+		line-height: 0.95;
+		margin: 0 0 0.35em;
+		max-width: 7ch;
+		font-style: oblique 14deg;
+		text-shadow:
+			0.02em 0.04em 0 rgba(0, 0, 0, 0.38),
+			0.08em 0.08em 0 #ff007f,
+			-0.04em -0.04em 0 #00a8ff;
+		position: relative;
+		z-index: 3;
+	}
+
+	.hero-nav-wrap {
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		padding-bottom: 0.8em;
+		position: relative;
+		z-index: 3;
+	}
+
+	.hero-nav {
+		display: grid;
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+		gap: 0.6em;
+		width: min(55em, 100%);
+	}
+
+	.hero-nav a {
+		display: inline-flex;
+		justify-content: center;
+		align-items: center;
+		text-align: center;
+		min-height: 3.2em;
+		padding: 0.7em 1em;
+		border-radius: 999em;
+		text-decoration: none;
+		border: 1px solid rgba(255, 205, 142, 0.55);
+		background:
+			radial-gradient(
+				130% 120% at 18% 8%,
+				rgba(255, 255, 182, 0.78),
+				rgba(255, 242, 214, 0) 56%
+			),
+			linear-gradient(160deg, rgba(255, 102, 0, 0.72), rgba(255, 0, 200, 0.72));
+		font-family: var(--font-title);
+		letter-spacing: 0.02em;
+		font-style: oblique 10deg;
+		color: #160019;
+		text-shadow: 0 0 0.7em rgba(255, 184, 92, 0.6);
+		box-shadow:
+			inset 0 0 0.8em rgba(255, 226, 153, 0.25),
+			0 0.65em 1.5em rgba(0, 0, 0, 0.34);
+		transition:
+			transform 180ms ease,
+			background 220ms ease,
+			border-color 220ms ease;
+	}
+
+	.hero-nav a:hover {
+		transform: translateY(-0.15em) scale(1.02);
+		background:
+			radial-gradient(
+				130% 120% at 18% 8%,
+				rgba(255, 255, 186, 0.88),
+				rgba(255, 242, 214, 0) 56%
+			),
+			linear-gradient(160deg, rgba(255, 126, 16, 0.82), rgba(255, 10, 210, 0.82));
+		border-color: rgba(255, 227, 171, 0.8);
+	}
+
+	.hero-nav .is-future {
+		opacity: 0.35;
+		pointer-events: none;
+	}
+
+	@media (max-width: 42em) {
+		.hero-nav {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+	}
+</style>

@@ -1,0 +1,326 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<section class="card card-socials" id="card-socials" data-card="socials">
+	<header class="card-header">
+		<h2>Соцсети и ссылки</h2>
+	</header>
+
+	<h3>Соцсети</h3>
+	<div class="social-grid">
+		<a
+			href="https://t.me/marchin_koshka"
+			aria-label="Телеграм"
+			class="brand-telegram"
+		>
+			<i class="icon fa-brands fa-telegram" aria-hidden="true"></i>
+			<span>Телеграм</span>
+		</a>
+		<a
+			href="https://vk.com/marchin_koshka"
+			aria-label="ВК"
+			class="brand-vk"
+		>
+			<i class="icon fa-brands fa-vk" aria-hidden="true"></i>
+			<span>ВК</span>
+		</a>
+		<a
+			href="https://youtube.com/@marchin_koshka"
+			aria-label="Ютуб"
+			class="brand-youtube"
+		>
+			<i class="icon fa-brands fa-youtube" aria-hidden="true"></i>
+			<span>Ютуб</span>
+		</a>
+		<a
+			href="https://tiktok.com/@marchin_koshka"
+			aria-label="Тикток"
+			class="brand-tiktok"
+		>
+			<i class="icon fa-brands fa-tiktok" aria-hidden="true"></i>
+			<span>Тикток</span>
+		</a>
+		<a
+			href="https://instagram.com/marchin_koshka"
+			aria-label="И*******м"
+			class="brand-instagram"
+		>
+			<i class="icon fa-brands fa-instagram" aria-hidden="true"></i>
+			<span>И*******м</span>
+		</a>
+	</div>
+
+	<h3>Стриминги</h3>
+	<div class="streaming-links badges">
+		<a
+			href="https://music.yandex.ru/artist/7049418"
+			class="img"
+			aria-label="Яндекс Музыка"
+		>
+			<img src="/badges/yandex.svg" alt="Яндекс Музыка" />
+		</a>
+		<a
+			href="https://open.spotify.com/artist/7tgA0ye0kGXPMs8zCnonp5?si=5opvxnQHRe6XAL_FKKg4Bw"
+			class="img"
+			aria-label="Spotify"
+		>
+			<img src="/badges/spotify.svg" alt="Spotify" />
+		</a>
+		<a
+			href="https://music.apple.com/us/artist/%D0%BC%D0%B0%D1%80%D1%87%D0%B8%D0%BD-%D0%BA%D0%BE%D1%88%D0%BA%D0%B0/1454612862"
+			class="img"
+			aria-label="Apple Music"
+		>
+			<img src="/badges/applemusic.svg" alt="Apple Music" />
+		</a>
+		<a
+			href="https://vk.com/marchin_koshka"
+			class="img"
+			aria-label="VK Музыка"
+		>
+			<img src="/badges/vk.svg" alt="VK Музыка" />
+		</a>
+	</div>
+
+	<h3>Ещё</h3>
+	<ul class="more-links">
+		<li>
+			<a href="https://agolovanov.com">agolovanov.com</a> — личный сайт автора
+			проекта
+		</li>
+		<li>
+			<a href="https://otkudazvuk.ru">otkudazvuk.ru</a> — фестиваль, который
+			мы делаем
+		</li>
+	</ul>
+
+	<footer class="social-footer">
+		marchin.ru, v2<br />© Александр Голованов, 2014—{currentYear}.
+		Спасибо, что докрутили до самого низа!
+	</footer>
+</section>
+
+<style>
+	.card-socials {
+		min-height: auto;
+		color: #fdf2e8;
+		background:
+			radial-gradient(
+				70vw 42vw at 120% 0%,
+				rgba(102, 255, 0, 0.64),
+				transparent 72%
+			),
+			radial-gradient(
+				76vw 50vw at -5% 120%,
+				rgba(255, 0, 200, 0.66),
+				transparent 65%
+			),
+			linear-gradient(155deg, #ff8f00, #ff1fb6);
+	}
+
+	.card-socials .card-header h2,
+	.card-socials h3 {
+		font-family: var(--font-title);
+		font-style: oblique 12deg;
+		letter-spacing: 0.04em;
+	}
+
+	.card-socials .card-header h2 {
+		margin: 0 0 0.85em;
+		font-size: clamp(1.55rem, 4vw, 2.7rem);
+		text-shadow:
+			0.09em 0.09em 0 #62ff00,
+			-0.04em -0.04em 0 #ff7a00;
+		position: relative;
+		z-index: 3;
+	}
+
+	.social-grid {
+		--social-btn-width: clamp(9.2em, 26vw, 10.8em);
+		display: grid;
+		grid-template-columns: repeat(
+			auto-fit,
+			minmax(var(--social-btn-width), var(--social-btn-width))
+		);
+		gap: 0.65em;
+		justify-content: start;
+		position: relative;
+		z-index: 3;
+		margin-bottom: 1.2em;
+	}
+
+	.social-grid a {
+		--brand-hl: rgba(255, 255, 180, 0.45);
+		--brand-a: rgba(255, 140, 0, 0.72);
+		--brand-b: rgba(255, 0, 170, 0.72);
+		--brand-text: #fff;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.5em;
+		min-height: 3.1em;
+		padding: 0.4em 0.8em;
+		border-radius: 1.1em;
+		border: 1px solid rgba(0, 0, 0, 0.72);
+		background:
+			radial-gradient(
+				130% 120% at 12% 8%,
+				var(--brand-hl),
+				rgba(255, 237, 194, 0) 50%
+			),
+			linear-gradient(160deg, var(--brand-a), var(--brand-b));
+		text-decoration: none;
+		font-weight: 700;
+		font-size: 1rem;
+		color: var(--brand-text);
+		text-shadow: 0 0 0.6em rgba(255, 174, 68, 0.46);
+		box-shadow:
+			inset 0 0 0.8em rgba(255, 199, 112, 0.18),
+			0 0.8em 1.8em rgba(0, 0, 0, 0.3);
+		transition:
+			transform 180ms ease,
+			background 220ms ease;
+		justify-self: start;
+		width: var(--social-btn-width);
+		white-space: nowrap;
+		box-shadow:
+			inset 0 0 0 0.08em rgba(255, 214, 143, 0.75),
+			0.28em 0.28em 0 rgba(22, 6, 40, 0.95),
+			-0.08em -0.08em 0 rgba(255, 153, 0, 0.5);
+	}
+
+	.social-grid a:hover {
+		transform: translateY(-0.14em);
+		background:
+			radial-gradient(
+				130% 120% at 12% 8%,
+				rgba(255, 255, 198, 0.56),
+				rgba(255, 237, 194, 0) 52%
+			),
+			linear-gradient(
+				160deg,
+				rgba(255, 180, 0, 0.82),
+				rgba(255, 10, 185, 0.82)
+			);
+	}
+
+	.social-grid .icon {
+		font-size: 1.18em;
+		color: #fff;
+	}
+
+	.social-grid a.brand-telegram {
+		--brand-hl: rgba(193, 232, 255, 0.52);
+		--brand-a: rgba(66, 168, 255, 0.86);
+		--brand-b: rgba(16, 123, 218, 0.86);
+		--brand-text: #fff;
+	}
+
+	.social-grid a.brand-vk {
+		--brand-hl: rgba(208, 227, 255, 0.48);
+		--brand-a: rgba(103, 152, 235, 0.86);
+		--brand-b: rgba(67, 114, 191, 0.86);
+		--brand-text: #fff;
+	}
+
+	.social-grid a.brand-youtube {
+		--brand-hl: rgba(255, 214, 214, 0.5);
+		--brand-a: rgba(255, 73, 73, 0.9);
+		--brand-b: rgba(201, 0, 0, 0.88);
+		--brand-text: #fff;
+	}
+
+	.social-grid a.brand-tiktok {
+		--brand-hl: rgba(220, 255, 253, 0.34);
+		--brand-a: rgba(41, 41, 41, 0.92);
+		--brand-b: rgba(8, 8, 8, 0.94);
+		--brand-text: #fff;
+		text-shadow: 0 0 0.45em rgba(84, 247, 255, 0.4);
+	}
+
+	.social-grid a.brand-instagram {
+		--brand-hl: rgba(255, 219, 178, 0.5);
+		--brand-a: rgba(255, 153, 53, 0.88);
+		--brand-b: rgba(214, 41, 118, 0.88);
+		--brand-text: #fff;
+	}
+
+	.streaming-links {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.55em;
+		margin: 0 0 1.2em;
+		position: relative;
+		z-index: 3;
+	}
+
+	.streaming-links a {
+		position: relative;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		padding: 0.35em 0.45em;
+		border: 1px solid rgba(0, 0, 0, 0.8);
+		border-radius: 0.9em;
+		overflow: hidden;
+		background: #141210;
+		text-decoration: none;
+		box-shadow:
+			inset 0 0 0 0.08em rgba(255, 214, 143, 0.75),
+			0.28em 0.28em 0 rgba(22, 6, 40, 0.95),
+			-0.08em -0.08em 0 rgba(255, 153, 0, 0.5);
+		transition:
+			transform 180ms ease,
+			background 220ms ease;
+	}
+
+	.streaming-links a:hover {
+		transform: translateY(-0.08em) scale(1.02);
+		background: #1a1715;
+	}
+
+	.streaming-links img {
+		height: 2.5em;
+		display: block;
+		position: relative;
+		z-index: 1;
+	}
+
+	.streaming-links a::after {
+		content: "";
+		position: absolute;
+		inset: 0;
+		z-index: 2;
+		pointer-events: none;
+		background:
+			radial-gradient(
+				120% 130% at 16% 8%,
+				rgba(255, 223, 165, 0.26),
+				rgba(255, 223, 165, 0) 52%
+			),
+			linear-gradient(
+				145deg,
+				rgba(255, 158, 40, 0.16),
+				rgba(255, 58, 176, 0.16)
+			);
+	}
+
+	.more-links {
+		padding-left: 1.2em;
+		margin: 0 0 1.4em;
+	}
+
+	.more-links li {
+		margin-bottom: 0.5em;
+	}
+
+	.more-links a {
+		color: #fff6ea;
+	}
+
+	.social-footer {
+		opacity: 0.9;
+		font-size: 0.92rem;
+	}
+</style>

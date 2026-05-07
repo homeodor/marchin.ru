@@ -1,0 +1,330 @@
+---
+type Release = {
+	id: string;
+	title: string;
+	kind: string;
+};
+
+const { releases } = Astro.props as { releases: Release[] };
+---
+
+<section class="card card-releases" id="card-releases" data-card="releases">
+	<header class="card-header">
+		<h2>Музыка</h2>
+	</header>
+	<h3>Послушать</h3>
+	<div class="streaming-links badges">
+		<a
+			href="https://music.yandex.ru/artist/7049418"
+			class="img"
+			aria-label="Яндекс Музыка"
+		>
+			<img src="/badges/yandex.svg" alt="Яндекс Музыка" />
+		</a>
+		<a
+			href="https://vk.com/artist/4537285883366867067"
+			class="img"
+			aria-label="VK Музыка"
+		>
+			<img src="/badges/vk.svg" alt="VK Музыка" />
+		</a>
+		<a
+			href="https://open.spotify.com/artist/7tgA0ye0kGXPMs8zCnonp5?si=5opvxnQHRe6XAL_FKKg4Bw"
+			class="img"
+			aria-label="Spotify"
+		>
+			<img src="/badges/spotify.svg" alt="Spotify" />
+		</a>
+		<a
+			href="https://music.apple.com/us/artist/%D0%BC%D0%B0%D1%80%D1%87%D0%B8%D0%BD-%D0%BA%D0%BE%D1%88%D0%BA%D0%B0/1454612862"
+			class="img"
+			aria-label="Apple Music"
+		>
+			<img src="/badges/applemusic.svg" alt="Apple Music" />
+		</a>
+	</div>
+	<h3>Релизы</h3>
+	<div
+		class="release-filter"
+		id="release-filter"
+		role="tablist"
+		aria-label="Фильтр релизов"
+	>
+		<span
+			class="release-filter-pill"
+			id="release-filter-pill"
+			aria-hidden="true"></span>
+		<button type="button" class="is-active" data-filter="all"
+			>Всё сразу</button
+		>
+		<button type="button" data-filter="lp">LP</button>
+		<button type="button" data-filter="ep">EP</button>
+		<button type="button" data-filter="single">Синглы</button>
+		<button type="button" data-filter="remix">Ремиксы</button>
+	</div>
+
+	<div class="release-grid-wrap" id="release-grid-wrap">
+		<div class="release-grid" id="release-grid">
+			{
+				releases.map((release) => (
+					<a
+						class="release-tile"
+						href={`/release/${release.id}/`}
+						data-kind={release.kind}
+					>
+						<img
+							src={`/covers/${release.id}.jpg`}
+							alt={`Обложка релиза ${release.title}`}
+							loading="lazy"
+						/>
+					</a>
+				))
+			}
+		</div>
+	</div>
+</section>
+
+<style>
+	.card-releases {
+		--music-text: #fff;
+		color: var(--music-text);
+		background:
+			radial-gradient(
+				58vw 34vw at 50% -6%,
+				rgba(255, 186, 92, 0.26),
+				transparent 70%
+			),
+			radial-gradient(
+				74vw 46vw at 78% 12%,
+				rgba(255, 128, 36, 0.14),
+				transparent 72%
+			),
+			radial-gradient(
+				90vw 66vw at 50% 120%,
+				rgba(0, 0, 0, 0.36),
+				transparent 78%
+			),
+			linear-gradient(158deg, #161311, #201814 46%, #12100f 100%);
+		overflow: visible;
+	}
+
+	.card-releases h3,
+	.card-releases .card-header h2 {
+		font-family: var(--font-title);
+		font-style: oblique 12deg;
+		letter-spacing: 0.04em;
+	}
+
+	.card-releases .card-header h2 {
+		color: #fff;
+		margin: 0 0 0.85em;
+		font-size: clamp(1.55rem, 4vw, 2.7rem);
+		text-shadow:
+			0.09em 0.09em 0 #050505,
+			-0.04em -0.04em 0 rgba(243, 239, 231, 0.45);
+		position: relative;
+		z-index: 3;
+	}
+
+	.streaming-links {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.55em;
+		margin: 0 0 1em;
+		position: relative;
+		z-index: 3;
+	}
+
+	.streaming-links a {
+		position: relative;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		padding: 0.45em 0.45em;
+		border: 1px solid rgba(0, 0, 0, 0.8);
+		border-radius: 0.7em;
+		overflow: hidden;
+		background: #141210;
+		text-decoration: none;
+		box-shadow:
+			inset 0 0 0 0.08em rgba(255, 214, 143, 0.75),
+			0.28em 0.28em 0 rgba(22, 6, 40, 0.95),
+			-0.08em -0.08em 0 rgba(255, 153, 0, 0.5);
+		transition:
+			transform 180ms ease,
+			background 220ms ease;
+	}
+
+	.streaming-links a:hover {
+		transform: translateY(-0.08em) scale(1.02);
+		background: #1a1715;
+	}
+
+	.streaming-links img {
+		height: 2.5em;
+		display: block;
+		position: relative;
+		z-index: 1;
+	}
+
+	.streaming-links a::after {
+		content: "";
+		position: absolute;
+		inset: 0;
+		z-index: 2;
+		pointer-events: none;
+		background:
+			radial-gradient(
+				120% 130% at 16% 8%,
+				rgba(255, 223, 165, 0.26),
+				rgba(255, 223, 165, 0) 52%
+			),
+			linear-gradient(
+				145deg,
+				rgba(255, 158, 40, 0.16),
+				rgba(255, 58, 176, 0.16)
+			);
+	}
+
+	.streaming-links a:hover::after {
+		background:
+			radial-gradient(
+				120% 130% at 16% 8%,
+				rgba(255, 238, 192, 0.34),
+				rgba(255, 223, 165, 0) 54%
+			),
+			linear-gradient(
+				145deg,
+				rgba(255, 184, 72, 0.22),
+				rgba(255, 88, 196, 0.22)
+			);
+	}
+
+	.release-filter {
+		--filter-height: 2.8em;
+		position: relative;
+		display: inline-flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 0.35em;
+		padding: 0.35em;
+		border-radius: calc(var(--filter-height) / 1.5);
+		border: 1px solid var(--line);
+		background:
+			radial-gradient(
+				120% 160% at 15% 10%,
+				rgba(255, 255, 255, 0.24),
+				transparent 44%
+			),
+			rgba(24, 22, 19, 0.78);
+		margin-bottom: 1.2em;
+		box-shadow: inset 0 0 1em rgba(255, 188, 107, 0.18);
+		z-index: 3;
+	}
+
+	.release-filter button {
+		position: relative;
+		z-index: 2;
+		height: var(--filter-height);
+		flex: 0 0 auto;
+		border: 0;
+		border-radius: 999em;
+		padding: 0 1.15em;
+		font-family: var(--font-main);
+		font-size: 1rem;
+		color: #f3efe7;
+		background: transparent;
+		cursor: pointer;
+		font-style: oblique 8deg;
+		letter-spacing: 0.02em;
+		white-space: nowrap;
+	}
+
+	.release-filter button.is-active {
+		color: #0f0f10;
+	}
+
+	.release-filter-pill {
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: var(--filter-height);
+		border-radius: 999em;
+		background:
+			radial-gradient(
+				115% 140% at 20% 10%,
+				rgba(255, 227, 176, 0.34),
+				rgba(255, 227, 176, 0) 52%
+			),
+			radial-gradient(
+				120% 120% at 16% 8%,
+				rgba(255, 186, 86, 0.22),
+				rgba(255, 186, 86, 0) 50%
+			),
+			linear-gradient(120deg, #f3efe7, #d6cec0);
+		box-shadow:
+			inset 0 0 0.6em rgba(255, 255, 255, 0.45),
+			0 0.4em 1em rgba(0, 0, 0, 0.35);
+		transition:
+			transform 320ms cubic-bezier(0.22, 1, 0.36, 1),
+			width 320ms ease;
+	}
+
+	.release-grid-wrap {
+		overflow: visible;
+		transition: height 380ms cubic-bezier(0.22, 1, 0.36, 1);
+		position: relative;
+		z-index: 3;
+	}
+
+	.release-grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: clamp(0.45em, 1.2vw, 0.9em);
+	}
+
+	.release-tile {
+		display: block;
+		perspective: 80em;
+		transform-origin: center;
+		transition:
+			opacity 300ms ease,
+			transform 330ms ease,
+			filter 280ms ease;
+	}
+
+	.release-tile[hidden] {
+		display: none !important;
+	}
+
+	.release-tile img {
+		display: block;
+		width: 100%;
+		aspect-ratio: 1;
+		object-fit: cover;
+		border-radius: 0.9em;
+		border: 1px solid rgba(0, 0, 0, 0.8);
+		box-shadow:
+			inset 0 0 0 0.08em rgba(255, 214, 143, 0.75),
+			0.28em 0.28em 0 rgba(22, 6, 40, 0.95),
+			-0.08em -0.08em 0 rgba(255, 153, 0, 0.5);
+		transition: transform 180ms ease;
+	}
+
+	.release-tile:hover img {
+		transform: translateZ(0) scale(1.045) rotate(-1deg);
+	}
+
+	.release-tile.is-hidden {
+		opacity: 0;
+		transform: rotateX(70deg) scale(0.82);
+		pointer-events: none;
+		filter: saturate(0.5);
+	}
+
+	@media (min-width: 52em) {
+		.release-grid {
+			grid-template-columns: repeat(5, minmax(0, 1fr));
+		}
+	}
+</style>
