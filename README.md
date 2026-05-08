@@ -1,47 +1,57 @@
-# Astro Starter Kit: Minimal
+# marchin.ru
 
-```sh
-npm create astro@latest -- --template minimal
+Official-ish source for **marchin.ru**: releases, covers, badges, and a healthy amount of pop chaos.
+
+## What lives here
+
+- `src/pages/` routes and page templates
+- `src/releases/*.json` release metadata (title, year, streaming links, etc.)
+- `public/covers/` release cover images
+- `public/badges/` streaming platform badges
+
+## Requirements
+
+- Node.js `>= 22.12.0` (CI is pinned to `22.12.0`)
+- npm (comes with Node)
+
+## Run locally
+
+```bash
+npm install
+npm run dev
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/minimal)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/minimal)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/minimal/devcontainer.json)
+Site will be available at `http://localhost:4321`.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Build and check
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+```bash
+npm run build
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+This runs:
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+- `astro check` for Astro/TypeScript diagnostics
+- `astro build` for production output in `dist/`
 
-Any static assets, like images, can be placed in the `public/` directory.
+## Add a new release
 
-## 🧞 Commands
+1. Create `src/releases/<id>.json`
+2. Add cover image `public/covers/<id>.jpg`
+3. Ensure JSON has at least:
+   - `data.id`
+   - `data.title`
+   - `data.year`
+   - `data.kind`
+   - `streaming` links object
+4. Run `npm run build`
 
-All commands are run from the root of the project, from a terminal:
+If it builds, it ships.
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+## CI
 
-## 👀 Want to learn more?
+GitHub Actions workflow:
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- [`.github/workflows/build.yml`](.github/workflows/build.yml)
+
+It installs dependencies and runs `npm run build` on pull requests to `master`.
