@@ -2,10 +2,12 @@
 import Header from "../components/header.astro";
 import Filter from "../components/filter.astro";
 import Glagne from "../components/glagne.astro";
+import type { Release } from "../ts/types";
 
-const releases = await Astro.glob("../releases/*.json");
+const releaseModules = import.meta.glob("../releases/*.json", { eager: true });
+const releases = Object.values(releaseModules) as Release[];
 
-releases.sort(function (x, y) {
+releases.sort(function (x: Release, y: Release) {
 	const xMonths = x.data.year * 12 + (x.data.month ?? 1);
 	const yMonths = y.data.year * 12 + (y.data.month ?? 1);
 	return xMonths > yMonths ? -1 : xMonths < yMonths ? 1 : 0;
@@ -24,7 +26,7 @@ releases.sort(function (x, y) {
 		<Glagne />
 		<main class="releases">
 			{
-				releases.map((release) => (
+				releases.map((release: Release) => (
 					<a class="psycho-out" href={`/release/${release.data.id}`}>
 						<div class="cover">
 							<img
