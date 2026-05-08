@@ -26,6 +26,7 @@ export interface Data {
 	title: string;
 	subtitle: string;
 	year: number;
+	month?: number;
 	kind: string;
 	description: string;
 	coverby: string;
